@@ -179,7 +179,6 @@ class Image extends Uploader
 
         if ($image instanceof GdImage) {
             imagewebp($image, $webPPath, $quality);
-            imagedestroy($image);
 
             if ($imagePath !== $webPPath && file_exists($imagePath)) {
                 unlink($imagePath);
@@ -229,8 +228,6 @@ class Image extends Uploader
             default => null,
         };
 
-        imagedestroy($source);
-        imagedestroy($thumb);
 
         return $outputPath;
     }
@@ -280,10 +277,10 @@ class Image extends Uploader
 
         $imagick->setImageFormat($format);
 
-        $compressionQuality = match ($format) {
-            'JPEG' => $quality['jpg'] ?? 75,
-            'PNG' => ($quality['png'] ?? 5) * 10,
-            'WEBP' => $quality['webp'] ?? 75,
+        $compressionQuality = match ($this->ext) {
+            'jpg' => $quality['jpg'] ?? 75,
+            'png' => ($quality['png'] ?? 5) * 10,
+            'webp' => $quality['webp'] ?? 75,
             default => 75,
         };
 

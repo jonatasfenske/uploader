@@ -48,7 +48,6 @@ final class FileValidatorTest extends TestCase
         $img = imagecreatetruecolor(1, 1);
         $path = $this->tempDir . '/test.png';
         imagepng($img, $path);
-        imagedestroy($img);
 
         $mime = FileValidator::detectMime($path);
 
@@ -60,7 +59,6 @@ final class FileValidatorTest extends TestCase
         $img = imagecreatetruecolor(10, 10);
         $path = $this->tempDir . '/valid.jpg';
         imagejpeg($img, $path);
-        imagedestroy($img);
 
         $file = ['name' => 'foto.jpg', 'tmp_name' => $path];
 
@@ -73,7 +71,6 @@ final class FileValidatorTest extends TestCase
         $img = imagecreatetruecolor(10, 10);
         $path = $this->tempDir . '/fake.exe';
         imagepng($img, $path);
-        imagedestroy($img);
 
         $file = ['name' => 'malware.exe', 'tmp_name' => $path];
 
@@ -88,7 +85,6 @@ final class FileValidatorTest extends TestCase
         $img = imagecreatetruecolor(10, 10);
         $path = $this->tempDir . '/spoofed.jpg';
         imagepng($img, $path);
-        imagedestroy($img);
 
         $file = ['name' => 'foto.jpg', 'tmp_name' => $path];
 
@@ -111,7 +107,6 @@ final class FileValidatorTest extends TestCase
         $img = imagecreatetruecolor(800, 600);
         $path = $this->tempDir . '/dims.png';
         imagepng($img, $path);
-        imagedestroy($img);
 
         self::assertTrue(FileValidator::validateDimensions($path, maxWidth: 1920, maxHeight: 1080));
     }
@@ -121,7 +116,6 @@ final class FileValidatorTest extends TestCase
         $img = imagecreatetruecolor(5000, 100);
         $path = $this->tempDir . '/wide.png';
         imagepng($img, $path);
-        imagedestroy($img);
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Largura máxima excedida');
@@ -133,7 +127,6 @@ final class FileValidatorTest extends TestCase
         $img = imagecreatetruecolor(100, 5000);
         $path = $this->tempDir . '/tall.png';
         imagepng($img, $path);
-        imagedestroy($img);
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Altura máxima excedida');
@@ -145,7 +138,6 @@ final class FileValidatorTest extends TestCase
         $img = imagecreatetruecolor(50, 50);
         $path = $this->tempDir . '/small.png';
         imagepng($img, $path);
-        imagedestroy($img);
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Largura mínima não atingida');
@@ -157,7 +149,6 @@ final class FileValidatorTest extends TestCase
         $img = imagecreatetruecolor(1, 1);
         $path = $this->tempDir . '/tiny.png';
         imagepng($img, $path);
-        imagedestroy($img);
 
         self::assertTrue(FileValidator::validateDimensions($path));
     }

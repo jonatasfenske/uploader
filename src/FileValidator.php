@@ -228,8 +228,8 @@ class FileValidator
  */
  public static function validateSize(array $file, int $maxBytes): bool
  {
- if (($file['size'] ?? 0) > $maxBytes) {
- $sizeMb = round(($file['size'] ?? 0) / 1024 / 1024, 2);
+ if ($file['size'] > $maxBytes) {
+ $sizeMb = round($file['size'] / 1024 / 1024, 2);
  $limitMb = round($maxBytes / 1024 / 1024, 2);
  throw new Exception("Arquivo muito grande: {$sizeMb}MB > {$limitMb}MB");
  }
