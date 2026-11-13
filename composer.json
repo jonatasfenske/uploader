@@ -1,0 +1,51 @@
+{
+    "name": "jonatasfenske/uploader",
+    "description": "Upload seguro de arquivos PHP 8.5 com validação MIME real via finfo_file, sanitização SVG, conversão WebP automática e suporte dual GD/Imagick",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["php85", "upload", "file-upload", "image-upload", "mime-validation", "webp", "svg-sanitization"],
+    "homepage": "https://github.com/jonatasfenske/uploader",
+    "authors": [
+        {
+            "name": "Robson V. Leite",
+            "email": "cursos@upinside.com.br",
+            "role": "Original Author"
+        },
+        {
+            "name": "Jonatas Fenske",
+            "role": "PHP 8.5 Modernization"
+        }
+    ],
+    "require": {
+        "php": ">=8.5",
+        "ext-gd": "*",
+        "ext-mbstring": "*",
+        "ext-exif": "*",
+        "ext-fileinfo": "*"
+    },
+    "suggest": {
+        "ext-imagick": "Para performance superior em processamento de imagens"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.0",
+        "phpstan/phpstan": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "JonatasFenske\\Uploader\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JonatasFenske\\Uploader\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "analyse": "phpstan analyse src tests --level=max"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable"
+}
